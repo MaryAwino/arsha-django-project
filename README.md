@@ -66,7 +66,7 @@ Follow these instructions to run the project locally.
 ### 1. Clone the repository
 
 ```bash
-git clone YOUR_GITHUB_REPOSITORY_URL
+git clone https://github.com/MaryAwino/arsha-django-project
 ```
 
 ### 2. Navigate into the project directory
@@ -92,7 +92,7 @@ python -m venv venv
 ### 5. Install Django
 
 ```bash
-pip install django==6.1.3
+pip install -r requirements.txt
 ```
 
 ### 6. Apply database migrations
