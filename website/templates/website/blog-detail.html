@@ -1,0 +1,81 @@
+{% extends 'website/base.html' %}
+{% load static %}
+
+{% block title %}
+{{ post.title }} | Arsha
+{% endblock %}
+
+{% block content %}
+
+<!-- Page Title -->
+<div class="page-title" data-aos="fade">
+    <div class="container">
+        <nav class="breadcrumbs">
+            <ol>
+                <li><a href="{% url 'home' %}">Home</a></li>
+                <li><a href="{% url 'blog' %}">Blog</a></li>
+                <li class="current">{{ post.title }}</li>
+            </ol>
+        </nav>
+        <h1>{{ post.title }}</h1>
+    </div>
+</div>
+<!-- End Page Title -->
+
+<!-- Blog Details Section -->
+<section class="blog-details section">
+    <div class="container">
+        <div class="row">
+
+            <div class="col-lg-8">
+
+                <article class="article">
+
+                    {% if post.featured_image %}
+                    <div class="post-img">
+                        <img
+                            src="{{ post.featured_image.url }}"
+                            alt="{{ post.title }}"
+                            class="img-fluid"
+                        >
+                    </div>
+                    {% endif %}
+
+                    <h2 class="title">{{ post.title }}</h2>
+
+                    <div class="meta-top">
+                        <ul>
+                            <li class="d-flex align-items-center">
+                                <i class="bi bi-person"></i>
+                                {{ post.author }}
+                            </li>
+
+                            <li class="d-flex align-items-center">
+                                <i class="bi bi-clock"></i>
+                                <time datetime="{{ post.created_at|date:'Y-m-d' }}">
+                                    {{ post.created_at|date:"F d, Y" }}
+                                </time>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="content">
+                        {{ post.content|linebreaks }}
+                    </div>
+
+                </article>
+
+                <div class="mt-4">
+                    <a href="{% url 'blog' %}" class="btn btn-primary">
+                        Back to Blog
+                    </a>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<!-- End Blog Details Section -->
+
+{% endblock %}

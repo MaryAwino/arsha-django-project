@@ -1,7 +1,7 @@
 
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib import messages
-from .models import ContactMessage, NewsletterSubscription
+from .models import ContactMessage, NewsletterSubscription, BlogPost
 
 
 def home(request):
@@ -9,7 +9,34 @@ def home(request):
 
 
 def blog(request):
-    return render(request, 'website/blog.html')
+    posts = BlogPost.objects.filter(
+        published=True
+    ).order_by('-created_at')
+
+    recent_posts = posts[:5]
+
+    context = {
+        'posts': posts,
+        'recent_posts': recent_posts,
+    }
+
+    return render(
+        request,
+        'website/blog.html',
+        context
+    )
+def blog_detail(request, slug):
+    post = get_object_or_404(
+        BlogPost,
+        slug=slug,
+        published=True
+    )
+
+    return render(
+        request,
+        'website/blog-detail.html',
+        {'post': post}
+    )
 
 
 def contact(request):
